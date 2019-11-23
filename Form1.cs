@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
-namespace AOAprojectpart
+namespace AOA_projectpart2
 {
     public partial class Form1 : Form
     {
@@ -19,20 +19,14 @@ namespace AOAprojectpart
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string path = @"C:\Users\Mahnoor Nasir\Desktop\New folder";
-            string[] folders = Directory.GetDirectories(path);
+            string partialName = txtfile.Text;
+            DirectoryInfo hdDirectoryInWhichToSearch = new DirectoryInfo(@"C:\folder");
+            FileInfo[] filesInDir = hdDirectoryInWhichToSearch.GetFiles("*" + partialName + "*.*");
 
-            foreach (string folder in folders)
+            foreach (FileInfo foundFile in filesInDir)
             {
-                string partialName = textBox1.Text;
-                DirectoryInfo hdDirectoryInWhichToSearch = new DirectoryInfo(folder);
-                FileInfo[] filesInDir = hdDirectoryInWhichToSearch.GetFiles("*" + partialName + "*.*");
-
-                foreach (FileInfo foundFile in filesInDir)
-                {
-                    string fullName = foundFile.FullName;
-                    listfiles.Items.Add(fullName);
-                }
+                string fullName = foundFile.FullName;
+                listBox1.Items.Add(fullName);
             }
         }
     }
